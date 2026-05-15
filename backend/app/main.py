@@ -3,7 +3,6 @@ FastAPI application entry point.
 """
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.middleware.gzip import GZIPMiddleware
 
 from app.config import API_TITLE, API_VERSION, API_DESCRIPTION, CORS_ORIGINS
 from app.routes import benchmark, models, system, optimize, cost
@@ -19,7 +18,6 @@ app = FastAPI(
 )
 
 # Middleware
-app.add_middleware(GZIPMiddleware, minimum_size=1000)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=CORS_ORIGINS,
