@@ -53,10 +53,20 @@ export const BenchmarkPage: React.FC = () => {
       <PromptInput onSubmit={handleBenchmark} loading={loading} />
 
       {error && (
-        <div className="mb-8 p-4 bg-red-50 rounded-lg border border-red-200">
-          <p className="text-red-800">
-            <strong>Error:</strong> {error}
-          </p>
+        <div className="fixed top-4 right-4 max-w-md p-4 bg-red-50 dark:bg-red-900 rounded-lg border-2 border-red-400 dark:border-red-600 shadow-lg z-50">
+          <div className="flex items-start gap-3">
+            <span className="text-2xl">❌</span>
+            <div className="flex-1">
+              <p className="font-bold text-red-800 dark:text-red-200">Error</p>
+              <p className="text-red-700 dark:text-red-300 text-sm mt-1">{error}</p>
+            </div>
+            <button
+              onClick={() => window.location.reload()}
+              className="text-red-600 dark:text-red-400 hover:text-red-800 dark:hover:text-red-200 font-semibold text-sm"
+            >
+              Retry
+            </button>
+          </div>
         </div>
       )}
 

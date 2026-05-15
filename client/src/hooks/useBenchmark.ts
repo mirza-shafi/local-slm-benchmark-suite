@@ -33,7 +33,7 @@ export const useBenchmark = () => {
       } catch (err) {
         const errorMessage = err instanceof Error ? err.message : "Benchmark failed";
         setError(errorMessage);
-        throw err;
+        console.error("Benchmark error:", err);
       } finally {
         setLoading(false);
       }
