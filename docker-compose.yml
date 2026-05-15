@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ~/.cache/huggingface:/root/.cache/huggingface
+      - ~/.cache/slm-benchmark:/root/.cache/slm-benchmark
+    environment:
+      - LOG_LEVEL=INFO
+      - PYTHONUNBUFFERED=1
+    command: python -m uvicorn app.main:app --host 0.0.0.0 --port 8000
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  frontend:
+    build: ./client
+    ports:
+      - "3000:3000"
+    environment:
+      - REACT_APP_API_URL=http://backend:8000/api
+    depends_on:
+      - backend
+    command: npm start

@@ -1,0 +1,28 @@
+# Client Dockerfile for deployment
+
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Copy package files
+COPY client/package*.json ./
+
+# Install dependencies
+RUN npm ci
+
+# Copy source code
+COPY client/src ./src
+COPY client/public ./public
+COPY client/tsconfig.json ./
+COPY client/tailwind.config.js ./
+COPY client/postcss.config.js ./
+
+# Build application
+RUN npm run build
+
+# Serve with serve package
+RUN npm install -g serve
+
+EXPOSE 3000
+
+CMD ["serve", "-s", "build", "-l", "3000"]

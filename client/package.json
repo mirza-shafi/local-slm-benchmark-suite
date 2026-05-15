@@ -1,0 +1,50 @@
+{
+  "name": "slm-benchmark-client",
+  "version": "1.0.0",
+  "description": "React frontend for Local SLM Benchmark Suite",
+  "private": true,
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.17.0",
+    "axios": "^1.6.0",
+    "recharts": "^2.10.3"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "@types/node": "^20.10.0",
+    "typescript": "^5.3.3",
+    "tailwindcss": "^3.3.6",
+    "postcss": "^8.4.32",
+    "autoprefixer": "^10.4.16",
+    "react-scripts": "5.0.1",
+    "web-vitals": "^2.1.4",
+    "@testing-library/react": "^14.1.2",
+    "@testing-library/jest-dom": "^6.1.5",
+    "@testing-library/user-event": "^13.5.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
