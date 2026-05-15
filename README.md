@@ -12,50 +12,389 @@ A production-grade benchmarking application for Small Language Models running en
 ✅ **Side-by-Side UI** - Compare outputs and metrics in one unified view  
 ✅ **Results History** - Save and retrieve past benchmarks
 
-## 🚀 Quick Start
+---
 
-### Prerequisites
+## 🚀 How to Run This Project (Step-by-Step)
 
-- **M1/M2 Mac** (recommended) or Intel Mac/Linux
-- **Python 3.10+**
-- **Node.js 18+**
-- **8GB RAM minimum** (16GB+ recommended)
-- **40GB disk space** (for all 3 models)
+### **STEP 1: Check Prerequisites**
 
-### Installation & Setup
+Open Terminal and verify you have everything:
 
 ```bash
-# Clone repository
-git clone <repo-url>
-cd local-slm-benchmark-suite
+# Check Python version (need 3.10+)
+python3 --version
 
-# Backend Setup
+# Check Node.js version (need 18+)
+node --version
+npm --version
+
+# Check available disk space (need ~40GB)
+df -h ~
+
+# Check available RAM
+vm_stat | grep "Pages free"
+```
+
+**Requirements:**
+- ✅ Python 3.10 or higher
+- ✅ Node.js 18 or higher  
+- ✅ 40GB free disk space (for models)
+- ✅ 8GB RAM minimum (16GB+ recommended)
+- ✅ M1/M2 Mac recommended (Intel works but slower)
+
+**Don't have Python 3.10+?** Install via Homebrew:
+```bash
+brew install python@3.11
+```
+
+**Don't have Node 18+?** Install via Homebrew:
+```bash
+brew install node@18
+```
+
+---
+
+### **STEP 2: Navigate to Project**
+
+```bash
+cd ~/sproject/local-slm-benchmark-suite
+```
+
+List files to confirm you're in right place:
+```bash
+ls -la
+# You should see: backend/, client/, README.md, plan.md, SETUP.md
+```
+
+---
+
+### **STEP 3: Install Backend (Python)**
+
+#### **3a. Create Virtual Environment**
+
+```bash
 cd backend
-python -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
+python3 -m venv venv
+```
 
-# Client Setup (in new terminal)
-cd client
+This creates a virtual environment in `backend/venv/` to isolate Python packages.
+
+#### **3b. Activate Virtual Environment**
+
+```bash
+source venv/bin/activate
+```
+
+You should see `(venv)` prefix in your terminal:
+```
+(venv) user@macbook backend %
+```
+
+#### **3c. Upgrade pip**
+
+```bash
+pip install --upgrade pip setuptools wheel
+```
+
+#### **3d. Install Python Dependencies**
+
+```bash
+pip install -r requirements.txt
+```
+
+This installs all required packages:
+- PyTorch (with M1 Metal support for fast inference)
+- Transformers (HuggingFace library)
+- FastAPI (web framework)
+- Uvicorn (ASGI server)
+- NLTK (NLP utilities)
+- And more...
+
+**This may take 5-10 minutes.** ☕
+
+#### **Verify Backend Installation**
+
+```bash
+python -c "import torch; print(f'PyTorch {torch.__version__}'); print(f'M1 Metal available: {torch.backends.mps.is_available()}')"
+```
+
+Should output something like:
+```
+PyTorch 2.1.0
+M1 Metal available: True  # (or False on Intel - still works)
+```
+
+---
+
+### **STEP 4: Install Frontend (Node.js)**
+
+#### **4a. Navigate to Client**
+
+Open **new terminal** (keep backend terminal open):
+```bash
+cd ~/sproject/local-slm-benchmark-suite/client
+```
+
+#### **4b. Install Dependencies**
+
+```bash
 npm install
 ```
 
-### Running the Application
+This installs:
+- React 18 (UI framework)
+- TypeScript (type safety)
+- Tailwind CSS (styling)
+- React Router (navigation)
+- Axios (API client)
+- And more...
 
-**Terminal 1 - Backend (FastAPI)**
+**This may take 5 minutes.** ☕
+
+#### **Verify Frontend Installation**
+
+```bash
+npm list react react-dom
+```
+
+Should show React 18 versions.
+
+---
+
+### **STEP 5: Run Backend Server**
+
+Go back to **first terminal** (backend):
+
 ```bash
 cd backend
-source venv/bin/activate
+source venv/bin/activate  # If not already activated
 python -m uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
-**Terminal 2 - Frontend (React)**
+**Expected output:**
+```
+INFO:     Uvicorn running on http://0.0.0.0:8000
+INFO:     Application startup complete
+```
+
+✅ **Backend is running!** Keep this terminal open.
+
+**Test it works:**
+Open new terminal and run:
 ```bash
-cd client
+curl http://localhost:8000/health
+```
+
+Should return a success message.
+
+**View API Docs:**
+Go to http://localhost:8000/docs in your browser (interactive API documentation)
+
+---
+
+### **STEP 6: Run Frontend Server**
+
+In **second terminal** (client):
+
+```bash
+cd ~/sproject/local-slm-benchmark-suite/client
 npm start
 ```
 
-Then open http://localhost:3000 in your browser.
+**Expected output:**
+```
+Compiled successfully!
+
+You can now view frontend in the browser.
+
+Local:            http://localhost:3000
+```
+
+Browser will automatically open http://localhost:3000 (or open manually if not).
+
+✅ **Frontend is running!** Keep this terminal open.
+
+---
+
+### **STEP 7: You're Ready! 🎉**
+
+Both servers running:
+- ✅ **Backend:** http://localhost:8000 (API running)
+- ✅ **Frontend:** http://localhost:3000 (Website open)
+- ✅ **API Docs:** http://localhost:8000/docs (Interactive documentation)
+
+### **STEP 8: Run Your First Benchmark**
+
+1. In browser at http://localhost:3000, you'll see the home page
+2. Click **"Start Benchmarking"** or go to http://localhost:3000/benchmark
+3. Enter a test prompt: 
+   ```
+   What is quantum computing? Explain in 100 words.
+   ```
+4. Select **"TinyLlama"** (fastest for first test)
+5. Click **"Run Benchmark"** button
+6. **Wait 1-5 minutes** (first run downloads the model)
+
+**First run:**
+- Downloads TinyLlama model (~600MB) from HuggingFace
+- Saves to `~/.cache/huggingface/`
+- Runs inference
+- Shows results with latency, memory, quality scores
+
+**Second run:**
+- Uses cached model
+- Instant results (no download)
+
+---
+
+## 📊 What You'll See
+
+The UI shows:
+- **Global Analytics** (top): Fastest, Best Quality, Most Efficient models
+- **Side-by-Side Outputs** (center): Model responses compared
+- **Performance Metrics** (left): Latency, throughput, memory for each model
+- **Quality Scores** (center-bottom): BLEU score, semantic similarity
+- **Cost Breakdown** (right): Energy and resource costs
+- **System Info** (top-right): Your hardware details (M1 Metal, RAM, etc.)
+
+---
+
+## ⚠️ Troubleshooting
+
+### **Backend won't start**
+
+```bash
+# Check if port 8000 is in use
+lsof -i :8000
+
+# Kill the process if needed
+kill -9 <PID>
+
+# Try different port
+python -m uvicorn app.main:app --port 8001
+```
+
+### **Frontend won't start**
+
+```bash
+# Check if port 3000 is in use
+lsof -i :3000
+
+# Kill the process if needed
+kill -9 <PID>
+
+# Try different port
+PORT=3001 npm start
+```
+
+### **Python packages not installing**
+
+```bash
+# Clear pip cache and try again
+pip install --no-cache-dir -r requirements.txt
+
+# Or use conda (if installed)
+conda env create -f environment.yml
+```
+
+### **npm packages not installing**
+
+```bash
+# Clear npm cache
+npm cache clean --force
+
+# Delete node_modules
+rm -rf node_modules package-lock.json
+
+# Reinstall
+npm install
+```
+
+### **Models not downloading**
+
+```bash
+# Check disk space
+df -h ~
+
+# Check internet connection
+ping huggingface.co
+
+# Check cache directory
+ls -la ~/.cache/huggingface/
+
+# If stuck, clear cache
+rm -rf ~/.cache/huggingface/
+# And try again
+```
+
+### **Out of memory error**
+
+```bash
+# Close other applications
+# Or use smaller model first (TinyLlama)
+# Check available memory
+vm_stat
+```
+
+---
+
+## 🛑 Stopping Servers
+
+When done, press `Ctrl+C` in each terminal:
+
+```bash
+# In backend terminal
+Ctrl+C
+
+# In frontend terminal  
+Ctrl+C
+```
+
+---
+
+## 📋 Summary: Running the Project
+
+**Every time you want to use the project:**
+
+**Terminal 1 - Backend:**
+```bash
+cd ~/sproject/local-slm-benchmark-suite/backend
+source venv/bin/activate
+python -m uvicorn app.main:app --reload
+```
+
+**Terminal 2 - Frontend:**
+```bash
+cd ~/sproject/local-slm-benchmark-suite/client
+npm start
+```
+
+**Then:**
+- Open http://localhost:3000 in browser
+- Go to Benchmark page
+- Enter prompt, select models, run!
+
+---
+
+## 📚 Quick Start (TL;DR)
+
+```bash
+# Setup (one time)
+cd ~/sproject/local-slm-benchmark-suite
+cd backend && python3 -m venv venv && source venv/bin/activate && pip install -r requirements.txt
+cd ../client && npm install
+
+# Run (every time)
+# Terminal 1:
+cd backend && source venv/bin/activate && python -m uvicorn app.main:app --reload
+
+# Terminal 2:
+cd client && npm start
+
+# Open browser: http://localhost:3000
+```
+
+---
 
 ## 📊 Performance Expectations (M1 Mac)
 
