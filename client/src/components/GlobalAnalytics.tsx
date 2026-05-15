@@ -49,7 +49,7 @@ export const GlobalAnalytics: React.FC<GlobalAnalyticsProps> = ({ result }) => {
       )}
 
       {/* Best Quality */}
-      {bestQualityResult && result.quality_scores[bestQualityModel] && (
+      {bestQualityResult && bestQualityModel && result.quality_scores[bestQualityModel] && (
         <div className="p-4 bg-blue-50 rounded-lg border border-blue-200 hover:shadow-lg transition">
           <div className="text-blue-700 font-bold text-sm mb-2">🎯 Best Quality</div>
           <div className="text-xl font-bold text-gray-800 mb-1">

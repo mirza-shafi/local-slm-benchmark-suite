@@ -22,7 +22,7 @@ export const MetricsPanel: React.FC<MetricsPanelProps> = ({ results }) => {
     { label: "TTFT", key: "time_to_first_token_ms", format: formatLatency },
     { label: "Throughput", key: "throughput_tokens_per_sec", format: formatThroughput },
     { label: "Memory", key: "memory_used_mb", format: formatMemory },
-    { label: "Tokens", key: "tokens_generated", format: (v) => `${v}` },
+    { label: "Tokens", key: "tokens_generated", format: (v: number) => `${v}` },
   ];
 
   return (
