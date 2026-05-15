@@ -11,9 +11,9 @@ import { DarkModeToggle } from "./components/DarkModeToggle";
 
 function AppContent() {
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
+    <div className="min-h-screen bg-gray-50 dark:bg-[#0f1419] transition-colors">
       {/* Navigation */}
-      <nav className="bg-white dark:bg-gray-800 shadow-md border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50">
+      <nav className="bg-white dark:bg-[#1a2332] shadow-md border-b border-gray-200 dark:border-[#2a3a52] sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2 text-2xl font-bold text-blue-600 dark:text-blue-400">
             🚀 SLM Benchmark
@@ -22,19 +22,19 @@ function AppContent() {
           <div className="flex gap-6 items-center">
             <Link
               to="/"
-              className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-semibold transition"
+              className="text-gray-600 dark:text-[#94a3b8] hover:text-blue-600 dark:hover:text-blue-400 font-semibold transition"
             >
               Home
             </Link>
             <Link
               to="/benchmark"
-              className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-semibold transition"
+              className="text-gray-600 dark:text-[#94a3b8] hover:text-blue-600 dark:hover:text-blue-400 font-semibold transition"
             >
               Benchmark
             </Link>
             <Link
               to="/about"
-              className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-semibold transition"
+              className="text-gray-600 dark:text-[#94a3b8] hover:text-blue-600 dark:hover:text-blue-400 font-semibold transition"
             >
               About
             </Link>
@@ -53,10 +53,10 @@ function AppContent() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-gray-800 dark:bg-gray-950 text-gray-300 dark:text-gray-400 py-8 mt-12 border-t border-gray-700 dark:border-gray-800">
+      <footer className="bg-gray-800 dark:bg-[#0f1419] text-gray-300 dark:text-[#94a3b8] py-8 mt-12 border-t border-gray-700 dark:border-[#2a3a52]">
         <div className="max-w-7xl mx-auto px-4 text-center">
           <p className="mb-2">Local SLM Benchmark Suite v1.0</p>
-          <p className="text-sm text-gray-400 dark:text-gray-500">
+          <p className="text-sm text-gray-400 dark:text-[#64748b]">
             Production-grade benchmarking for Small Language Models. Privacy-first. Free.
             Open-source.
           </p>

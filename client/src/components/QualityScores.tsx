@@ -15,20 +15,20 @@ interface QualityScoresProps {
 export const QualityScores: React.FC<QualityScoresProps> = ({ scores, results }) => {
   return (
     <div className="mb-8">
-      <h3 className="text-xl font-bold mb-4 text-gray-800 dark:text-gray-100">⭐ Quality Evaluation</h3>
+      <h3 className="text-xl font-bold mb-4 text-gray-800 dark:text-[#e2e8f0]">⭐ Quality Evaluation</h3>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {Object.entries(scores).map(([model, score]) => (
           <div
             key={model}
-            className="p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700"
+            className="p-4 bg-white dark:bg-[#1a2332] rounded-lg border border-gray-200 dark:border-[#2a3a52]"
           >
-            <div className="font-bold text-gray-800 dark:text-gray-100 mb-3 pb-2 border-b border-gray-200 dark:border-gray-700">
+            <div className="font-bold text-gray-800 dark:text-[#e2e8f0] mb-3 pb-2 border-b border-gray-200 dark:border-[#2a3a52]">
               {model.toUpperCase()}
             </div>
 
             <div className="space-y-2">
               <div className="flex justify-between items-center text-sm">
-                <span className="text-gray-600 dark:text-gray-400">BLEU Score:</span>
+                <span className="text-gray-600 dark:text-[#94a3b8]">BLEU Score:</span>
                 <span
                   className={`font-semibold ${getMetricColor(
                     "bleu_score",
@@ -40,7 +40,7 @@ export const QualityScores: React.FC<QualityScoresProps> = ({ scores, results })
               </div>
 
               <div className="flex justify-between items-center text-sm">
-                <span className="text-gray-600 dark:text-gray-400">Similarity:</span>
+                <span className="text-gray-600 dark:text-[#94a3b8]">Similarity:</span>
                 <span
                   className={`font-semibold ${getMetricColor(
                     "similarity_score",
@@ -51,8 +51,8 @@ export const QualityScores: React.FC<QualityScoresProps> = ({ scores, results })
                 </span>
               </div>
 
-              <div className="flex justify-between items-center text-sm pt-2 border-t border-gray-200 dark:border-gray-700">
-                <span className="text-gray-600 dark:text-gray-400 font-semibold">Combined:</span>
+              <div className="flex justify-between items-center text-sm pt-2 border-t border-gray-200 dark:border-[#2a3a52]">
+                <span className="text-gray-600 dark:text-[#94a3b8] font-semibold">Combined:</span>
                 <span
                   className={`font-bold text-lg ${getMetricColor(
                     "combined_score",

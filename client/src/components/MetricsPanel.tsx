@@ -27,14 +27,14 @@ export const MetricsPanel: React.FC<MetricsPanelProps> = ({ results }) => {
 
   return (
     <div className="mb-8">
-      <h3 className="text-xl font-bold mb-4 text-gray-800 dark:text-gray-100">📊 Performance Metrics</h3>
+      <h3 className="text-xl font-bold mb-4 text-gray-800 dark:text-[#e2e8f0]">📊 Performance Metrics</h3>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {results.map((result) => (
           <div
             key={result.model}
-            className="p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700"
+            className="p-4 bg-white dark:bg-[#1a2332] rounded-lg border border-gray-200 dark:border-[#2a3a52]"
           >
-            <div className="font-bold text-gray-800 dark:text-gray-100 mb-3 pb-2 border-b border-gray-200 dark:border-gray-700">
+            <div className="font-bold text-gray-800 dark:text-[#e2e8f0] mb-3 pb-2 border-b border-gray-200 dark:border-[#2a3a52]">
               {result.model.toUpperCase()}
             </div>
 
@@ -48,7 +48,7 @@ export const MetricsPanel: React.FC<MetricsPanelProps> = ({ results }) => {
                     key={metric.key}
                     className="flex justify-between items-center text-sm"
                   >
-                    <span className="text-gray-600 dark:text-gray-400">{metric.label}:</span>
+                    <span className="text-gray-600 dark:text-[#94a3b8]">{metric.label}:</span>
                     <span
                       className={`font-semibold ${getMetricColor(
                         metric.key,
