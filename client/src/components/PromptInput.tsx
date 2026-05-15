@@ -48,13 +48,13 @@ export const PromptInput: React.FC<PromptInputProps> = ({ onSubmit, loading }) =
   };
 
   return (
-    <div className="mb-8 p-6 bg-white rounded-lg shadow-md border border-gray-200">
-      <h2 className="text-2xl font-bold mb-4 text-gray-800">🔍 Benchmark Setup</h2>
+    <div className="mb-8 p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md border border-gray-200 dark:border-gray-700">
+      <h2 className="text-2xl font-bold mb-4 text-gray-800 dark:text-gray-100">🔍 Benchmark Setup</h2>
 
       <form onSubmit={handleSubmit}>
         {/* Prompt Input */}
         <div className="mb-6">
-          <label className="block text-sm font-semibold mb-2 text-gray-700">
+          <label className="block text-sm font-semibold mb-2 text-gray-700 dark:text-gray-300">
             Enter your prompt:
           </label>
           <textarea
@@ -62,21 +62,21 @@ export const PromptInput: React.FC<PromptInputProps> = ({ onSubmit, loading }) =
             onChange={(e) => setPrompt(e.target.value)}
             placeholder="E.g., Explain quantum computing in 100 words..."
             rows={4}
-            className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+            className="w-full p-4 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400"
             disabled={loading}
           />
-          <p className="text-xs text-gray-500 mt-1">
+          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
             Tip: More specific prompts lead to better comparisons
           </p>
         </div>
 
         {/* Model Selection */}
         <div className="mb-6">
-          <label className="block text-sm font-semibold mb-3 text-gray-700">
+          <label className="block text-sm font-semibold mb-3 text-gray-700 dark:text-gray-300">
             Select models to compare:
           </label>
           {loadingModels ? (
-            <p className="text-gray-500">Loading models...</p>
+            <p className="text-gray-500 dark:text-gray-400">Loading models...</p>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
               {models.map((model) => (

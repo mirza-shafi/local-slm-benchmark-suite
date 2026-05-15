@@ -7,12 +7,12 @@ import React from "react";
 export const AboutPage: React.FC = () => {
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
-      <h1 className="text-4xl font-bold text-gray-800 mb-6">About This Project</h1>
+      <h1 className="text-4xl font-bold text-gray-800 dark:text-gray-100 mb-6">About This Project</h1>
 
-      <div className="space-y-8 text-gray-700">
+      <div className="space-y-8 text-gray-700 dark:text-gray-300">
         {/* Project Overview */}
         <section>
-          <h2 className="text-2xl font-bold text-gray-800 mb-3">Project Overview</h2>
+          <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-3">Project Overview</h2>
           <p>
             The Local SLM Benchmark Suite is a production-grade tool for benchmarking Small
             Language Models entirely on your local hardware. It addresses three critical
@@ -34,10 +34,10 @@ export const AboutPage: React.FC = () => {
 
         {/* Technology Stack */}
         <section>
-          <h2 className="text-2xl font-bold text-gray-800 mb-3">Technology Stack</h2>
+          <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-3">Technology Stack</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <h4 className="font-bold text-blue-600 mb-2">Backend</h4>
+              <h4 className="font-bold text-blue-600 dark:text-blue-400 mb-2">Backend</h4>
               <ul className="list-disc pl-6 space-y-1 text-sm">
                 <li>FastAPI (modern, async Python framework)</li>
                 <li>Transformers (HuggingFace model loading)</li>
@@ -46,7 +46,7 @@ export const AboutPage: React.FC = () => {
               </ul>
             </div>
             <div>
-              <h4 className="font-bold text-blue-600 mb-2">Frontend</h4>
+              <h4 className="font-bold text-blue-600 dark:text-blue-400 mb-2">Frontend</h4>
               <ul className="list-disc pl-6 space-y-1 text-sm">
                 <li>React (UI framework)</li>
                 <li>TypeScript (type safety)</li>
@@ -59,30 +59,30 @@ export const AboutPage: React.FC = () => {
 
         {/* Key Features */}
         <section>
-          <h2 className="text-2xl font-bold text-gray-800 mb-3">Key Features</h2>
+          <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-3">Key Features</h2>
           <div className="space-y-3">
-            <div className="p-3 bg-blue-50 rounded border border-blue-200">
-              <strong className="text-blue-900">Side-by-Side Comparison:</strong> View model
+            <div className="p-3 bg-blue-50 dark:bg-blue-900 rounded border border-blue-200 dark:border-blue-700">
+              <strong className="text-blue-900 dark:text-blue-200">Side-by-Side Comparison:</strong> View model
               outputs and metrics in one unified view
             </div>
-            <div className="p-3 bg-blue-50 rounded border border-blue-200">
-              <strong className="text-blue-900">Performance Metrics:</strong> Track latency,
+            <div className="p-3 bg-blue-50 dark:bg-blue-900 rounded border border-blue-200 dark:border-blue-700">
+              <strong className="text-blue-900 dark:text-blue-200">Performance Metrics:</strong> Track latency,
               throughput, memory usage, tokens/sec
             </div>
-            <div className="p-3 bg-blue-50 rounded border border-blue-200">
-              <strong className="text-blue-900">Quality Evaluation:</strong> BLEU scores and
+            <div className="p-3 bg-blue-50 dark:bg-blue-900 rounded border border-blue-200 dark:border-blue-700">
+              <strong className="text-blue-900 dark:text-blue-200">Quality Evaluation:</strong> BLEU scores and
               semantic similarity analysis
             </div>
-            <div className="p-3 bg-blue-50 rounded border border-blue-200">
-              <strong className="text-blue-900">Prompt Optimization:</strong> Get AI suggestions
+            <div className="p-3 bg-blue-50 dark:bg-blue-900 rounded border border-blue-200 dark:border-blue-700">
+              <strong className="text-blue-900 dark:text-blue-200">Prompt Optimization:</strong> Get AI suggestions
               to improve your prompts
             </div>
-            <div className="p-3 bg-blue-50 rounded border border-blue-200">
-              <strong className="text-blue-900">Cost Analysis:</strong> Estimate inference cost
+            <div className="p-3 bg-blue-50 dark:bg-blue-900 rounded border border-blue-200 dark:border-blue-700">
+              <strong className="text-blue-900 dark:text-blue-200">Cost Analysis:</strong> Estimate inference cost
               and energy consumption
             </div>
-            <div className="p-3 bg-blue-50 rounded border border-blue-200">
-              <strong className="text-blue-900">Results History:</strong> Save and retrieve past
+            <div className="p-3 bg-blue-50 dark:bg-blue-900 rounded border border-blue-200 dark:border-blue-700">
+              <strong className="text-blue-900 dark:text-blue-200">Results History:</strong> Save and retrieve past
               benchmarks
             </div>
           </div>
@@ -90,26 +90,26 @@ export const AboutPage: React.FC = () => {
 
         {/* Metrics Explained */}
         <section>
-          <h2 className="text-2xl font-bold text-gray-800 mb-3">Metrics Explained</h2>
+          <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-3">Metrics Explained</h2>
           <div className="space-y-3 text-sm">
             <div>
-              <strong className="text-gray-800">Latency (ms):</strong> Time from prompt
+              <strong className="text-gray-800 dark:text-gray-200">Latency (ms):</strong> Time from prompt
               submission to complete response. Lower is better.
             </div>
             <div>
-              <strong className="text-gray-800">TTFT (ms):</strong> Time to First Token. How
+              <strong className="text-gray-800 dark:text-gray-200">TTFT (ms):</strong> Time to First Token. How
               long before you see the first output. Lower feels more responsive.
             </div>
             <div>
-              <strong className="text-gray-800">Throughput (tok/s):</strong> Tokens generated
+              <strong className="text-gray-800 dark:text-gray-200">Throughput (tok/s):</strong> Tokens generated
               per second. Higher means faster processing.
             </div>
             <div>
-              <strong className="text-gray-800">Memory (MB):</strong> Peak RAM used during
+              <strong className="text-gray-800 dark:text-gray-200">Memory (MB):</strong> Peak RAM used during
               inference. Lower means less powerful hardware needed.
             </div>
             <div>
-              <strong className="text-gray-800">Quality (BLEU/Similarity):</strong> Measures
+              <strong className="text-gray-800 dark:text-gray-200">Quality (BLEU/Similarity):</strong> Measures
               output correctness. Higher is better.
             </div>
           </div>
@@ -117,7 +117,7 @@ export const AboutPage: React.FC = () => {
 
         {/* Design Philosophy */}
         <section>
-          <h2 className="text-2xl font-bold text-gray-800 mb-3">Design Philosophy</h2>
+          <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-3">Design Philosophy</h2>
           <div className="space-y-3">
             <p>
               <strong>Industry-Grade Code Quality:</strong> Type-safe (TypeScript + Python
@@ -140,35 +140,35 @@ export const AboutPage: React.FC = () => {
 
         {/* Local vs Cloud */}
         <section>
-          <h2 className="text-2xl font-bold text-gray-800 mb-3">Why Local Matters</h2>
-          <table className="w-full text-sm border border-gray-300">
-            <thead className="bg-gray-100">
+          <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-3">Why Local Matters</h2>
+          <table className="w-full text-sm border border-gray-300 dark:border-gray-600">
+            <thead className="bg-gray-100 dark:bg-gray-700">
               <tr>
-                <th className="p-2 border border-gray-300 text-left">Aspect</th>
-                <th className="p-2 border border-gray-300 text-left">Local</th>
-                <th className="p-2 border border-gray-300 text-left">Cloud API</th>
+                <th className="p-2 border border-gray-300 dark:border-gray-600 text-left">Aspect</th>
+                <th className="p-2 border border-gray-300 dark:border-gray-600 text-left">Local</th>
+                <th className="p-2 border border-gray-300 dark:border-gray-600 text-left">Cloud API</th>
               </tr>
             </thead>
             <tbody>
-              <tr className="hover:bg-gray-50">
-                <td className="p-2 border border-gray-300 font-bold">Privacy</td>
-                <td className="p-2 border border-gray-300">✅ Full</td>
-                <td className="p-2 border border-gray-300">❌ No</td>
+              <tr className="hover:bg-gray-50 dark:hover:bg-gray-700">
+                <td className="p-2 border border-gray-300 dark:border-gray-600 font-bold">Privacy</td>
+                <td className="p-2 border border-gray-300 dark:border-gray-600">✅ Full</td>
+                <td className="p-2 border border-gray-300 dark:border-gray-600">❌ No</td>
               </tr>
-              <tr className="hover:bg-gray-50">
-                <td className="p-2 border border-gray-300 font-bold">Cost</td>
-                <td className="p-2 border border-gray-300">✅ Free</td>
-                <td className="p-2 border border-gray-300">❌ $$$</td>
+              <tr className="hover:bg-gray-50 dark:hover:bg-gray-700">
+                <td className="p-2 border border-gray-300 dark:border-gray-600 font-bold">Cost</td>
+                <td className="p-2 border border-gray-300 dark:border-gray-600">✅ Free</td>
+                <td className="p-2 border border-gray-300 dark:border-gray-600">❌ $$$</td>
               </tr>
-              <tr className="hover:bg-gray-50">
-                <td className="p-2 border border-gray-300 font-bold">Real Latency</td>
-                <td className="p-2 border border-gray-300">✅ Yes</td>
-                <td className="p-2 border border-gray-300">❌ Network added</td>
+              <tr className="hover:bg-gray-50 dark:hover:bg-gray-700">
+                <td className="p-2 border border-gray-300 dark:border-gray-600 font-bold">Real Latency</td>
+                <td className="p-2 border border-gray-300 dark:border-gray-600">✅ Yes</td>
+                <td className="p-2 border border-gray-300 dark:border-gray-600">❌ Network added</td>
               </tr>
-              <tr className="hover:bg-gray-50">
-                <td className="p-2 border border-gray-300 font-bold">No Limits</td>
-                <td className="p-2 border border-gray-300">✅ Unlimited</td>
-                <td className="p-2 border border-gray-300">❌ Rate limited</td>
+              <tr className="hover:bg-gray-50 dark:hover:bg-gray-700">
+                <td className="p-2 border border-gray-300 dark:border-gray-600 font-bold">No Limits</td>
+                <td className="p-2 border border-gray-300 dark:border-gray-600">✅ Unlimited</td>
+                <td className="p-2 border border-gray-300 dark:border-gray-600">❌ Rate limited</td>
               </tr>
             </tbody>
           </table>
@@ -176,7 +176,7 @@ export const AboutPage: React.FC = () => {
 
         {/* System Requirements */}
         <section>
-          <h2 className="text-2xl font-bold text-gray-800 mb-3">System Requirements</h2>
+          <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-3">System Requirements</h2>
           <ul className="list-disc pl-6 space-y-2">
             <li>
               <strong>M1/M2 Mac:</strong> Recommended (Metal acceleration). 8GB RAM minimum
@@ -195,7 +195,7 @@ export const AboutPage: React.FC = () => {
 
         {/* Contributing */}
         <section>
-          <h2 className="text-2xl font-bold text-gray-800 mb-3">Open Source</h2>
+          <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-3">Open Source</h2>
           <p>
             This project is built entirely with free, open-source libraries and is designed to
             be production-ready and industry-grade. Contributions welcome!
