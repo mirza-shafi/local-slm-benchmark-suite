@@ -120,9 +120,14 @@ python -c "import torch; print(f'PyTorch {torch.__version__}'); print(f'M1 Metal
 
 Should output something like:
 ```
-PyTorch 2.1.0
+PyTorch 2.4.1
 M1 Metal available: True  # (or False on Intel - still works)
 ```
+
+> **If you get `ImportError: Library not loaded: @rpath/libtorch_cpu.dylib`** (or any torch `.dylib` "no such file" error), your PyTorch wheel is incomplete/corrupted. Reinstall it:
+> ```bash
+> pip install --force-reinstall --no-cache-dir torch==2.4.1
+> ```
 
 ---
 
@@ -179,6 +184,17 @@ INFO:     Application startup complete
 
 ✅ **Backend is running!** Keep this terminal open.
 
+> **⚠️ Port 8000 already in use?** If another project (or service) is on port 8000, run this backend on a different port and tell the frontend where to find it:
+> ```bash
+> # Backend on 8001 instead of 8000
+> python -m uvicorn app.main:app --reload --port 8001
+> ```
+> Then start the frontend with a matching API URL (see STEP 6):
+> ```bash
+> REACT_APP_API_URL=http://localhost:8001/api npm start
+> ```
+> Check what's holding a port with `lsof -i :8000`.
+
 **Test it works:**
 Open new terminal and run:
 ```bash
@@ -214,6 +230,12 @@ Browser will automatically open http://localhost:3000 (or open manually if not).
 
 ✅ **Frontend is running!** Keep this terminal open.
 
+> **Pointing the frontend at a non-default backend port:** the client calls `http://localhost:8000/api` by default. If your backend runs elsewhere (e.g. 8001), start the frontend with:
+> ```bash
+> REACT_APP_API_URL=http://localhost:8001/api npm start
+> ```
+> Symptoms of a mismatch: the UI shows **"Failed to load system info"** (backend unreachable) or requests hit the wrong service.
+
 ---
 
 ### **STEP 7: You're Ready! 🎉**
@@ -234,6 +256,11 @@ Both servers running:
 4. Select **"TinyLlama"** (fastest for first test)
 5. Click **"Run Benchmark"** button
 6. **Wait 1-5 minutes** (first run downloads the model)
+
+> **⚠️ Pick models that fit your free RAM.** Inference loads the full model into memory:
+> - **< 8 GB free RAM:** use **TinyLlama only** (~600 MB, needs ~2 GB).
+> - **Phi-2** needs ~5–6 GB free; **Mistral-7B** needs ~8+ GB free.
+> - If you select a model too large for available memory, the machine will swap heavily and the **server will appear frozen** (the UI hangs on "Loading…") until it finishes or you restart the backend. Check free memory first with `vm_stat` / Activity Monitor and close other apps.
 
 **First run:**
 - Downloads TinyLlama model (~600MB) from HuggingFace
@@ -548,10 +575,20 @@ Full API docs available at http://localhost:8000/docs (Swagger UI)
 - Check system load: `top` or Activity Monitor
 - Disable other apps
 
-### Connection Refused (API)
-- Ensure backend running on port 8000
-- Check firewall settings
-- Verify `REACT_APP_API_URL` env variable
+### Connection Refused (API) / "Failed to load system info"
+- Ensure the backend is actually running (`curl http://localhost:8000/health` — or your chosen port).
+- **Port mismatch:** if the backend runs on a non-default port (e.g. 8001 because 8000 was taken), the frontend must be started with `REACT_APP_API_URL=http://localhost:8001/api npm start`. A stale browser tab from an earlier build may still target the old port — hard-refresh (Cmd+Shift+R).
+- Check firewall settings.
+
+### UI stuck on "Loading…" during a benchmark
+- The backend runs inference on its main loop, so while a large model loads/runs it cannot answer other requests (system info, models list, etc.). The UI will appear frozen until the benchmark completes.
+- On a memory-constrained machine a too-large model (Phi-2 / Mistral-7B) can thrash on swap and effectively never finish. Restart the backend to recover and use TinyLlama instead.
+
+### `ImportError: libtorch_cpu.dylib` (or other torch `.dylib`) not found
+- The PyTorch install is incomplete/corrupted. Reinstall it:
+  ```bash
+  pip install --force-reinstall --no-cache-dir torch==2.4.1
+  ```
 
 ## 📚 Resources
 
@@ -559,6 +596,13 @@ Full API docs available at http://localhost:8000/docs (Swagger UI)
 - [Backend README](./backend/README.md) - Backend documentation
 - [Client README](./client/README.md) - Frontend documentation
 - [FastAPI Docs](http://localhost:8000/docs) - Interactive API documentation
+
+## ⚙️ Known Issues & Limitations
+
+- **Single-threaded inference blocks the API.** Benchmarks run synchronously on the server's event loop, so while a model is loading or generating, other endpoints (system info, models, history) don't respond and the UI looks frozen. Plan: offload inference to a threadpool/background worker.
+- **BLEU score currently returns 0.0.** With `nltk==3.8.1` on Python 3.12 the BLEU call fails (`Fraction.__new__() got an unexpected keyword argument '_normalize'`) and is caught/zeroed. Semantic similarity still works. Fix: upgrade NLTK or patch the smoothing call.
+- **Models load at full `float16` precision, not quantized.** Despite the "quantized" labels below, `loader.py` loads standard fp16 weights, so real memory use is higher than the quantized figures (Phi-2 ≈ 5–6 GB, Mistral-7B ≈ 14+ GB). Size your hardware accordingly.
+- **Very small `max_tokens` or certain chat templates can yield short/empty output.** Increase `max_tokens` if a model returns an empty string.
 
 ## 📝 License
 
